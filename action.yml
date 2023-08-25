@@ -56,7 +56,7 @@ runs:
     - name: Run credo
       run: mix credo
       shell: sh
-      if: inputs.check-credo
+      if: inputs.check-credo == 'true'
 
     - name: Run security scan on code
       run: mix sobelow --config
