@@ -64,7 +64,7 @@ runs:
       if: inputs.check-sobelow == 'true'
 
     - name: Run audit of dependencies
-      run: mix hex.audit
+      run: mix deps.audit
       shell: sh
       if: inputs.check-deps-audit == 'true'
 
