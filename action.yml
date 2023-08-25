@@ -53,28 +53,28 @@ runs:
       env:
         MIX_ENV: dev
     
-    - name: Run linter
+    - name: Run credo
       run: mix credo
       shell: sh
-      if: ${{ inputs.check-credo }}
+      if: inputs.check-credo
 
     - name: Run security scan on code
       run: mix sobelow --config
       shell: sh
-      if: ${{ inputs.check-sobelow }}
+      if: inputs.check-sobelow
 
     - name: Run audit of dependencies
       run: mix hex.audit
       shell: sh
-      if: ${{ inputs.check-deps-audit }}
+      if: inputs.check-deps-audit
 
     - name: Run doc coverage
       run: mix doctor
       shell: sh
-      if: ${{ inputs.check-doc-coverage }}
+      if: inputs.check-doc-coverage
 
     - name: Run xref graph
       run: mix xref graph --label compile-connected --fail-above ${{ inputs.xref-graph-fail-above }}
       shell: sh
-      if: ${{ inputs.check-xref-graph }}
+      if: inputs.check-xref-graph
   
