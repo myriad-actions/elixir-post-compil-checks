@@ -1,5 +1,5 @@
-name: Run Elixir Project
-description: Checks out the code and runs the test
+name: Audit and lint
+description: Runs Credo, Sobelow,, deps.audit, Doctor
 inputs:
   elixir-version:
     required: true
@@ -15,23 +15,23 @@ inputs:
   #################################################################
   check-credo:
     description: "Run credo"
-    default: 'true'
+    default: true
     required: false
   check-sobelow:
     description: "Run sobelow"
-    default: 'true'
+    default: true
     required: false
   check-deps-audit:
     description: "Run deps.audit"
-    default: 'true'
+    default: true
     required: false
   check-doc-coverage:
     description: "Run doc coverage"
-    default: 'true'
+    default: true
     required: false
   check-xref-graph:
     description: "Run xref graph"
-    default: 'true'
+    default: true
     required: false
   xref-graph-fail-above:
     description: "Fail if xref graph has more than this number of warnings"
@@ -56,25 +56,25 @@ runs:
     - name: Run linter
       run: mix credo
       shell: sh
-      if: ${{ inputs.check-credo }} == 'true'
+      if: ${{ inputs.check-credo }}
 
     - name: Run security scan on code
       run: mix sobelow --config
       shell: sh
-      if: ${{ inputs.check-sobelow }} == 'true'
+      if: ${{ inputs.check-sobelow }}
 
     - name: Run audit of dependencies
       run: mix hex.audit
       shell: sh
-      if: ${{ inputs.check-deps-audit }} == 'true'
+      if: ${{ inputs.check-deps-audit }}
 
     - name: Run doc coverage
       run: mix doctor
       shell: sh
-      if: ${{ inputs.check-doc-coverage }} == 'true'
+      if: ${{ inputs.check-doc-coverage }}
 
     - name: Run xref graph
       run: mix xref graph --label compile-connected --fail-above ${{ inputs.xref-graph-fail-above }}
       shell: sh
-      if: ${{ inputs.check-xref-graph }} == 'true'
+      if: ${{ inputs.check-xref-graph }}
   
