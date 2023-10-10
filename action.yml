@@ -13,6 +13,10 @@ inputs:
   #################################################################
   # Everything below this line is optional.
   #################################################################
+  check-format:
+    description: "Run format check"
+    default: 'true'
+    required: false
   check-credo:
     description: "Run credo"
     default: 'true'
@@ -52,6 +56,11 @@ runs:
         ssh-key: ${{ inputs.ssh-key }}
       env:
         MIX_ENV: dev
+
+    - name: Check format
+      run: mix format --check-formatted
+      shell: sh
+      if: inputs.check-format == 'true'
     
     - name: Run credo
       run: mix credo
