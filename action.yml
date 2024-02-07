@@ -10,6 +10,9 @@ inputs:
   ssh-key:
     description: SSH key to use for the CI
     required: true
+  service_name:
+    description: 'Name of the service'
+    required: true
   #################################################################
   # Everything below this line is optional.
   #################################################################
@@ -87,3 +90,8 @@ runs:
       shell: sh
       if: inputs.check-xref-graph == 'true'
   
+    - name: collect and send data to db 
+      uses: myriad-actions/security-dashboard-action
+      with:
+        service_name: ${{ inputs.service_name }}
+       
