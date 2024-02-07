@@ -44,6 +44,10 @@ inputs:
     description: "Fail if xref graph has more than this number of warnings"
     default: '0'
     required: false
+  send-data:
+    description: "Send data to the security dashboard"
+    default: 'true'
+    required: false
 
 runs:
   using: "composite"
@@ -92,6 +96,7 @@ runs:
   
     - name: collect and send data to db 
       uses: myriad-actions/security-dashboard-action
+      if : inputs.send-data == 'true'
       with:
         service_name: ${{ inputs.service_name }}
        
