@@ -80,7 +80,7 @@ runs:
       if: inputs.check-sobelow == 'true'
 
     - name: Run audit of dependencies
-      run: mix deps.audit --format json > /results/deps_audit.json
+      run: mix deps.audit --format json > /deps_audit.json
       shell: sh
       if: inputs.check-deps-audit == 'true'
 
