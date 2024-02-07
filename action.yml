@@ -96,7 +96,7 @@ runs:
   
     - name: collect and send data to db 
       uses: myriad-actions/security-dashboard-action
-      if : inputs.send-data == 'true'
+      if: inputs.send-data == 'true'
       with:
         service_name: ${{ inputs.service_name }}
        
