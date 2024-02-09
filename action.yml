@@ -13,6 +13,18 @@ inputs:
   service_name:
     description: 'Name of the service'
     required: true
+  sec_db:
+    description: 'Security Database Name'
+    required: true
+  sec_db_user:
+    description: 'Security Database User'
+    required: true
+  sec_db_pw:
+    description: 'Security Database Password'
+    required: true
+  sec_db_host:
+    description: 'Security Database Host'
+    required: true
   #################################################################
   # Everything below this line is optional.
   #################################################################
@@ -99,4 +111,7 @@ runs:
       if: inputs.send-data == 'true'
       with:
         service_name: ${{ inputs.service_name }}
-       
+        sec_db: ${{ inputs.sec_db }}
+        sec_db_user: ${{ inputs.sec_db_user }}
+        sec_db_pw: ${{ inputs.sec_db_pw }}
+        sec_db_host: ${{ inputs.sec_db_host }}
