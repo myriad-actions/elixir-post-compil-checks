@@ -107,7 +107,7 @@ runs:
       if: inputs.check-xref-graph == 'true'
   
     - name: collect and send data to db 
-      uses: myriad-actions/security-dashboard-action
+      uses: myriad-actions/security-dashboard-action@v1
       if: inputs.send-data == 'true'
       with:
         service_name: ${{ inputs.service_name }}
