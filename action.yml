@@ -87,12 +87,16 @@ runs:
       if: inputs.check-credo == 'true'
 
     - name: Run security scan on code
-      run: mix sobelow --config
+      run: |
+        set -o pipefail
+        mix sobelow --config | tee ${GITHUB_WORKSPACE}/sobelow.json
       shell: sh
       if: inputs.check-sobelow == 'true'
 
     - name: Run audit of dependencies
-      run: mix deps.audit --format json > ${GITHUB_WORKSPACE}/deps_audit.json
+      run: |
+        set -o pipefail
+        mix deps.audit --format json | tee ${GITHUB_WORKSPACE}/deps_audit.json
       shell: sh
       if: inputs.check-deps-audit == 'true'
 
