@@ -10,9 +10,6 @@ inputs:
   ssh-key:
     description: SSH key to use for the CI
     required: true
-  service_name:
-    description: 'Name of the service'
-    required: true
   sec_db:
     description: 'Security Database Name'
     required: true
@@ -90,14 +87,14 @@ runs:
       run: |
         set -o pipefail
         mix sobelow --config | tee ${GITHUB_WORKSPACE}/sobelow.json
-      shell: sh
+      shell: bash
       if: inputs.check-sobelow == 'true'
 
     - name: Run audit of dependencies
       run: |
         set -o pipefail
         mix deps.audit --format json | tee ${GITHUB_WORKSPACE}/deps_audit.json
-      shell: sh
+      shell: bash
       if: inputs.check-deps-audit == 'true'
 
     - name: Run doc coverage
@@ -114,7 +111,6 @@ runs:
       uses: myriad-actions/security-dashboard-action@v1
       if: inputs.send-data == 'true'
       with:
-        service_name: ${{ inputs.service_name }}
         sec_db: ${{ inputs.sec_db }}
         sec_db_user: ${{ inputs.sec_db_user }}
         sec_db_pw: ${{ inputs.sec_db_pw }}
