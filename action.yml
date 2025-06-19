@@ -93,7 +93,7 @@ runs:
     - name: Run audit of dependencies
       run: |
         set -o pipefail
-        mix deps.audit --format json | tee ${GITHUB_WORKSPACE}/deps_audit.json
+        mix deps.audit --format json --ignore-advisory-ids "$(cat .mix_audit.ignore)" | tee ${GITHUB_WORKSPACE}/deps_audit.json
       shell: bash
       if: inputs.check-deps-audit == 'true'
 
