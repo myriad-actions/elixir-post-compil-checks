@@ -46,7 +46,7 @@ runs:
   using: "composite"
   steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Elixir Project
       uses: myriad-actions/elixir-setup@v1
@@ -61,7 +61,7 @@ runs:
       run: mix format --check-formatted
       shell: sh
       if: inputs.check-format == 'true'
-    
+
     - name: Run credo
       run: mix credo
       shell: sh
@@ -86,4 +86,3 @@ runs:
       run: mix xref graph --label compile-connected --fail-above ${{ inputs.xref-graph-fail-above }}
       shell: sh
       if: inputs.check-xref-graph == 'true'
-  
