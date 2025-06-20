@@ -73,7 +73,7 @@ runs:
       if: inputs.check-sobelow == 'true'
 
     - name: Run audit of dependencies
-      run: mix deps.audit
+      run: mix deps.audit --ignore-advisory-ids "$(cat .mix_audit.ignore)"
       shell: sh
       if: inputs.check-deps-audit == 'true'
 
